@@ -3,17 +3,82 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.multi.electrico;/**
+package com.mycompany.multi.electrico;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
+/**
  *
  * @author libreria6
  */
 public class VSenoide extends javax.swing.JInternalFrame {
-    /**
-     * Creates new form GastoR
-     */
+   int num1,num2,num3=0;
+   String funciones;
+   double punto,y=0;
     public VSenoide() {
         initComponents();
 
+    }
+    public void GraficarPlano(){
+        Graphics lapiz = Pizarron.getGraphics();
+        Graphics2D lapiz2D;
+        lapiz2D = (Graphics2D) lapiz;
+        
+        int anchura = Pizarron.getWidth();
+        int altura = Pizarron.getHeight();
+        int x0=anchura/2;
+        int y0= altura/2;
+        lapiz.setColor(Color.white);
+        lapiz.fillRect(0, 0, anchura, altura);
+        
+        lapiz.setColor(Color.BLACK);
+        lapiz2D.drawLine(0, y0,anchura, y0);
+        lapiz2D.drawLine(x0, 0,x0, altura);
+        
+    }
+     public void Graficar(){
+        int A = 1;
+        int B = 1; // partes de la grafica de seno
+        int C = 0; // partes de la grafica de seno
+        int D = 1;
+        Graphics lapiz = Pizarron.getGraphics();
+        Graphics2D lapiz2D;
+        lapiz2D = (Graphics2D) lapiz;
+        
+        int anchura = Pizarron.getWidth();
+        int altura = Pizarron.getHeight();
+        int x0=anchura/2;
+        int y0= altura/2;
+        lapiz.setColor(Color.RED);
+        lapiz2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        if(!"".equals(Amplitud.getText()))
+        {
+            A= (int) Double.parseDouble(Amplitud.getText());
+        }
+        if(!"".equals(periodo.getText()))
+        {
+            B= (int) ((2* Math.PI) /Double.parseDouble(periodo.getText()));
+        }
+        if(!"".equals(Desface.getText()))
+        {
+            C= Integer.parseInt(Desface.getText());
+        }
+        if(!"".equals(Frecuencia.getText()))
+        {
+            D=Integer.parseInt(Frecuencia.getText());
+            if(D!=0)
+            {
+               B= (1/D);
+            }
+        }
+        for(int i= -143; i<=anchura; i++)
+        {
+            int xi= i + (x0-180);
+            lapiz2D.drawLine(xi+(C*20), y0+(int)(50*A*Math.sin(Math.toRadians(B*i))), xi+(C*20), y0+(int)(50*A*Math.sin(Math.toRadians(B*i))));
+        }
     }
 
     /**
@@ -25,41 +90,155 @@ public class VSenoide extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Pizarron = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        Amplitud = new javax.swing.JTextField();
+        periodo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        Frecuencia = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        Desface = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Gráfica Senoidal");
         setVisible(true);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        Pizarron.setBackground(new java.awt.Color(204, 204, 255));
+
+        javax.swing.GroupLayout PizarronLayout = new javax.swing.GroupLayout(Pizarron);
+        Pizarron.setLayout(PizarronLayout);
+        PizarronLayout.setHorizontalGroup(
+            PizarronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 434, Short.MAX_VALUE)
+        );
+        PizarronLayout.setVerticalGroup(
+            PizarronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 243, Short.MAX_VALUE)
+        );
+
+        jLabel1.setText("Voltaje de Pico");
+
+        jLabel2.setText("Periodo");
+
+        jLabel3.setText("Frecuencia");
+
+        jLabel4.setText("Desfase");
+
+        jButton1.setText("Graficar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Borrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Amplitud, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(periodo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Desface, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                        .addGap(33, 33, 33))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 228, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(Amplitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(Frecuencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(periodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(Desface, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Pizarron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(Pizarron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        GraficarPlano();
+        Graficar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        GraficarPlano();
+        Amplitud.setText("");
+        periodo.setText("");
+        Desface.setText("");
+        Frecuencia.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Amplitud;
+    private javax.swing.JTextField Desface;
+    private javax.swing.JTextField Frecuencia;
+    private javax.swing.JPanel Pizarron;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField periodo;
     // End of variables declaration//GEN-END:variables
 }
