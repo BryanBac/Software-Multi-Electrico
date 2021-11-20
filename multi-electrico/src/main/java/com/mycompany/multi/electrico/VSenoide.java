@@ -15,9 +15,7 @@ import java.awt.RenderingHints;
  * @author libreria6
  */
 public class VSenoide extends javax.swing.JInternalFrame {
-   int num1,num2,num3=0;
-   String funciones;
-   double punto,y=0;
+
     public VSenoide() {
         initComponents();
 
@@ -40,9 +38,9 @@ public class VSenoide extends javax.swing.JInternalFrame {
         
     }
      public void Graficar(){
-        int A = 1;
-        int B = 1; // partes de la grafica de seno
-        int C = 0; // partes de la grafica de seno
+        int A = 1; // y = A SEN ( B X + C)
+        int B = 1;  // Periodo = 2pi/ B
+        int C = 0; 
         int D = 1;
         Graphics lapiz = Pizarron.getGraphics();
         Graphics2D lapiz2D;
@@ -71,13 +69,13 @@ public class VSenoide extends javax.swing.JInternalFrame {
             D=Integer.parseInt(Frecuencia.getText());
             if(D!=0)
             {
-               B= (1/D);
+               B= (int) ((2* Math.PI) * D);;
             }
         }
         for(int i= -143; i<=anchura; i++)
         {
             int xi= i + (x0-180);
-            lapiz2D.drawLine(xi+(C*20), y0+(int)(50*A*Math.sin(Math.toRadians(B*i))), xi+(C*20), y0+(int)(50*A*Math.sin(Math.toRadians(B*i))));
+            lapiz2D.drawLine(xi, y0+(int)(50*A*Math.sin(Math.toRadians(B*i +(C)))), xi, y0+(int)(50*A*Math.sin(Math.toRadians(B*i+(C)))));
         }
     }
 

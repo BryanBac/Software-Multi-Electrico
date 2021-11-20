@@ -222,7 +222,6 @@ public class VInductancia extends javax.swing.JInternalFrame {
             Double longitud = Double.parseDouble(longi.getText());
             Double areaa = Double.parseDouble(area.getText());
             Double inductancia = 0.0;
-            
             switch (jComboBox2.getSelectedIndex()){
                 case 0:
                 break;
@@ -247,10 +246,7 @@ public class VInductancia extends javax.swing.JInternalFrame {
                 default:
                 break;
             }
-            
-            
             inductancia = ((espiras * espiras) * perme * areaa) / longitud;
-            
             inductanciaText.setText(inductancia.toString());    
        }
 
